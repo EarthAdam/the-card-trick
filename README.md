@@ -2,4 +2,6 @@
 A Memory Palace for memorizing a deck of cards
 
 ![](./progress_current.png)
-Currently just a breakdown of 10 cards
+Breaks down 52 cards in a deck into a somewhat orderly array. 
+
+NOTE: Doesn't include differentiation of suits.
