@@ -9,6 +9,13 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/Ti3 - Card Trick/[Ll]ibrary/
+/Ti3 - Card Trick/[Tt]emp/
+/Ti3 - Card Trick/[Oo]bj/
+/Ti3 - Card Trick/[Bb]uild/
+/Ti3 - Card Trick/[Bb]uilds/
+/Ti3 - Card Trick/[Ll]ogs/
+/Ti3 - Card Trick/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
