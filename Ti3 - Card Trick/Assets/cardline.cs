@@ -5,19 +5,37 @@ using UnityEngine;
 public class cardline : MonoBehaviour
 {
     private string order = "A234567890";
-    private string order1 = "A9K3Q4J258Q02750JKKA5248970J2J7490KAQ34802KQJ65460";
+    private string order1 = "2JA9K3Q4J258Q02750JKKA5248970J2J7490KAQ34802KQJ65460";
     // Start is called before the first frame update
     void Start()
     {
-        plot10(0,order1.Substring(0,10));
-        plot10(1,order1.Substring(10,10));
-        plot10(2,order1.Substring(20,10));
-        plot10(3,order1.Substring(30,10));
-        plot10(4,order1.Substring(40,10));
+        plot2(order1.Substring(0,2));
+        plot10(0,order1.Substring(2,10));
+        plot10(1,order1.Substring(12,10));
+        plot10(2,order1.Substring(22,10));
+        plot10(3,order1.Substring(32,10));
+        plot10(4,order1.Substring(42,10));
+    }
+    void plot2(string cards)
+    {
+        print(cards);
+        GameObject sub_deck = new GameObject();
+        sub_deck.transform.parent = this.transform;
+        float constant = 82.50f;
+        sub_deck.transform.parent = this.transform;
+        sub_deck.AddComponent<LineRenderer>();
+        LineRenderer line = sub_deck.GetComponent<LineRenderer>();
+        line.positionCount = 2;
+        line.SetWidth(0.003f,0.003f);
+        line.material = new Material(Shader.Find("Sprites/Default"));
+        Color lineColor = Color.white;
+        line.SetColors(lineColor,lineColor);
+        Vector3 offset = new Vector3(-0.02f,-0.04f,-0.04f);
+        line.SetPosition(0,this.transform.position+offset+(cardPosition(cards.Substring(0,1))+new Vector3(0,0,0))/constant);
+        line.SetPosition(1,this.transform.position+offset+(cardPosition(cards.Substring(1,1))+new Vector3(0,0,1))/constant);
     }
     void plot10(int position,string cards)
     {
-        print(cards);
         GameObject sub_deck = new GameObject();
         sub_deck.transform.parent = this.transform;
         string fS = cards.Substring(0,3);
