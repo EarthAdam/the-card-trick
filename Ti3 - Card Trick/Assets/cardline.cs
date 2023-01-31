@@ -4,26 +4,65 @@ using UnityEngine;
 
 public class cardline : MonoBehaviour
 {
-    public string order1 = "A234567890";
-    public string order2 = "A234567890";
-    public GameObject first;
-    public GameObject second;
-    public GameObject third;
+    private string order = "A234567890";
+    private string order1 = "A9K3Q4J258Q02750JKKA5248970J2J7490KAQ34802KQJ65460";
     // Start is called before the first frame update
     void Start()
     {
+        plot10(0,order1.Substring(0,10));
+        plot10(1,order1.Substring(10,10));
+        plot10(2,order1.Substring(20,10));
+        plot10(3,order1.Substring(30,10));
+        plot10(4,order1.Substring(40,10));
+    }
+    void plot10(int position,string cards)
+    {
+        print(cards);
+        GameObject sub_deck = new GameObject();
+        sub_deck.transform.parent = this.transform;
+        string fS = cards.Substring(0,3);
+        string sS = cards.Substring(3,3);
+        string tS = cards.Substring(6,4);
+        print(fS+":"+sS+":"+tS);
+        float constant = 82.50f;
+         
+        GameObject first = new GameObject();
+        GameObject second = new GameObject();
+        GameObject third = new GameObject();
+        first.transform.parent = sub_deck.transform;
+        second.transform.parent = sub_deck.transform;
+        third.transform.parent = sub_deck.transform;
+        first.AddComponent<LineRenderer>();
+        second.AddComponent<LineRenderer>();
+        third.AddComponent<LineRenderer>();
         LineRenderer l1 = first.GetComponent<LineRenderer>();
         LineRenderer l2 = second.GetComponent<LineRenderer>();
         LineRenderer l3 = third.GetComponent<LineRenderer>();
         l1.positionCount = 3;
         l2.positionCount = 3;
         l3.positionCount = 4;
-        string fS = order1.Substring(0,3);
-        string sS = order1.Substring(3,3);
-        string tS = order1.Substring(6,4);
-        print(fS+":"+sS+":"+tS);
-        float constant = 82.50f;
-        Vector3 offset = new Vector3(-0.02f,-0.04f,0);
+        l1.SetWidth(0.003f,0.003f);
+        l2.SetWidth(0.003f,0.003f);
+        l3.SetWidth(0.003f,0.003f);
+        l1.material = new Material(Shader.Find("Sprites/Default"));
+        l2.material = new Material(Shader.Find("Sprites/Default"));
+        l3.material = new Material(Shader.Find("Sprites/Default"));
+        Color lineColor = Color.white;
+        if(position==0)
+            lineColor = new Color(0.1f, 0.6f, 1.0f);
+        if(position==1)
+            lineColor = Color.green;
+        if(position==2)
+            lineColor = Color.yellow;
+        if(position==3)
+            lineColor = new Color(1, 0.3f, 0.1f);
+        if(position==4)
+            lineColor = Color.red;
+        
+        l1.SetColors(lineColor,lineColor);
+        l2.SetColors(lineColor,lineColor);
+        l3.SetColors(lineColor,lineColor);
+        Vector3 offset = new Vector3(-0.02f,-0.04f,position/6.0f);
         l1.SetPosition(0,this.transform.position+offset+(cardPosition(fS.Substring(0,1))+new Vector3(0,0,0))/constant);
         l1.SetPosition(1,this.transform.position+offset+(cardPosition(fS.Substring(1,1))+new Vector3(0,0,1))/constant);
         l1.SetPosition(2,this.transform.position+offset+(cardPosition(fS.Substring(2,1))+new Vector3(0,0,2))/constant);
@@ -34,7 +73,6 @@ public class cardline : MonoBehaviour
         l3.SetPosition(1,this.transform.position+offset+(cardPosition(tS.Substring(1,1))+new Vector3(0,0,9))/constant);
         l3.SetPosition(2,this.transform.position+offset+(cardPosition(tS.Substring(2,1))+new Vector3(0,0,10))/constant);
         l3.SetPosition(3,this.transform.position+offset+(cardPosition(tS.Substring(3,1))+new Vector3(0,0,11))/constant);
-
     }
 
     Vector3 cardPosition(string card_ID)
